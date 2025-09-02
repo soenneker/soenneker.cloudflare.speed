@@ -255,7 +255,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_get_single_setting_200> Get0RttSettings(string zoneId,
+    public async ValueTask<Zone_settings_get_single_setting_200?> Get0RttSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting 0-RTT settings for zone {ZoneId}", zoneId);
@@ -271,7 +271,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_edit_single_setting_200> Update0RttSettings(string zoneId, bool enabled,
+    public async ValueTask<Zone_settings_edit_single_setting_200?> Update0RttSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating 0-RTT settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
@@ -291,7 +291,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_edit_single_setting_200> Enable0Rtt(string zoneId,
+    public async ValueTask<Zone_settings_edit_single_setting_200?> Enable0Rtt(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling 0-RTT for zone {ZoneId}", zoneId);
@@ -320,7 +320,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new Zones_zone_settings_single_request
             {
-                ZonesZoneSettingsSingleRequestMember1 = new Zones_zone_settings_single_requestMember1() { Enabled = false}
+                ZonesZoneSettingsSingleRequestMember1 = new Zones_zone_settings_single_requestMember1 { Enabled = false}
             };
 
             return await client.Zones[zoneId].Settings["0rtt"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();

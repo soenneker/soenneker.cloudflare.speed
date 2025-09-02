@@ -94,14 +94,14 @@ public interface ICloudflareSpeedUtil
     /// </summary>
     /// <param name="zoneId">The ID of the zone</param>
     /// <returns>The updated Early Hints settings</returns>
-    ValueTask<Zone_settings_edit_single_setting_200> DisableEarlyHints(string zoneId, CancellationToken cancellationToken = default);
+    ValueTask<Zone_settings_edit_single_setting_200?> DisableEarlyHints(string zoneId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the current 0-RTT Connection Resumption settings for a zone
     /// </summary>
     /// <param name="zoneId">The ID of the zone</param>
     /// <returns>The current 0-RTT Connection Resumption settings</returns>
-    ValueTask<Zone_settings_get_single_setting_200> Get0RttSettings(string zoneId, CancellationToken cancellationToken = default);
+    ValueTask<Zone_settings_get_single_setting_200?> Get0RttSettings(string zoneId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates the 0-RTT Connection Resumption settings for a zone
@@ -109,19 +109,19 @@ public interface ICloudflareSpeedUtil
     /// <param name="zoneId">The ID of the zone</param>
     /// <param name="enabled">Whether to enable or disable 0-RTT Connection Resumption</param>
     /// <returns>The updated 0-RTT Connection Resumption settings</returns>
-    ValueTask<Zone_settings_edit_single_setting_200> Update0RttSettings(string zoneId, bool enabled, CancellationToken cancellationToken = default);
+    ValueTask<Zone_settings_edit_single_setting_200?> Update0RttSettings(string zoneId, bool enabled, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Enables 0-RTT Connection Resumption for a zone
     /// </summary>
     /// <param name="zoneId">The ID of the zone</param>
     /// <returns>The updated 0-RTT Connection Resumption settings</returns>
-    ValueTask<Zone_settings_edit_single_setting_200> Enable0Rtt(string zoneId, CancellationToken cancellationToken = default);
+    ValueTask<Zone_settings_edit_single_setting_200?> Enable0Rtt(string zoneId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Disables 0-RTT Connection Resumption for a zone
     /// </summary>
     /// <param name="zoneId">The ID of the zone</param>
     /// <returns>The updated 0-RTT Connection Resumption settings</returns>
-    ValueTask<Zone_settings_edit_single_setting_200> Disable0Rtt(string zoneId, CancellationToken cancellationToken = default);
+    ValueTask<Zone_settings_edit_single_setting_200?> Disable0Rtt(string zoneId, CancellationToken cancellationToken = default);
 }
