@@ -177,11 +177,12 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_get_single_setting_200> GetEarlyHintsSettings(string zoneId,
+    public async ValueTask<Zone_settings_get_single_setting_200?> GetEarlyHintsSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting Early Hints settings for zone {ZoneId}", zoneId);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
+
         try
         {
             return await client.Zones[zoneId].Settings["early_hints"].GetAsync(cancellationToken: cancellationToken).NoSync();
@@ -193,7 +194,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_edit_single_setting_200> UpdateEarlyHintsSettings(string zoneId, bool enabled,
+    public async ValueTask<Zone_settings_edit_single_setting_200?> UpdateEarlyHintsSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating Early Hints settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
@@ -213,7 +214,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_edit_single_setting_200> EnableEarlyHints(string zoneId,
+    public async ValueTask<Zone_settings_edit_single_setting_200?> EnableEarlyHints(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling Early Hints for zone {ZoneId}", zoneId);
@@ -233,7 +234,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_edit_single_setting_200> DisableEarlyHints(string zoneId,
+    public async ValueTask<Zone_settings_edit_single_setting_200?> DisableEarlyHints(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling Early Hints for zone {ZoneId}", zoneId);
@@ -244,6 +245,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
             {
                 ZonesZoneSettingsSingleRequestMember1 = new Zones_zone_settings_single_requestMember1 { Enabled = false }
             };
+
             return await client.Zones[zoneId].Settings["early_hints"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
         catch (Exception ex)
@@ -309,7 +311,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<Zone_settings_edit_single_setting_200> Disable0Rtt(string zoneId,
+    public async ValueTask<Zone_settings_edit_single_setting_200?> Disable0Rtt(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling 0-RTT for zone {ZoneId}", zoneId);
@@ -320,6 +322,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
             {
                 ZonesZoneSettingsSingleRequestMember1 = new Zones_zone_settings_single_requestMember1() { Enabled = false}
             };
+
             return await client.Zones[zoneId].Settings["0rtt"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
         catch (Exception ex)
