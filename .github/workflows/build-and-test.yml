@@ -38,7 +38,7 @@ jobs:
         run: dotnet build test/Soenneker.Cloudflare.Speed.Tests/Soenneker.Cloudflare.Speed.Tests.csproj --configuration Release --no-restore --verbosity minimal
 
       - name: Test
-        run: dotnet test test/Soenneker.Cloudflare.Speed.Tests/Soenneker.Cloudflare.Speed.Tests.csproj --configuration Release --no-build --no-restore --verbosity minimal
+        run: dotnet test --project test/Soenneker.Cloudflare.Speed.Tests/Soenneker.Cloudflare.Speed.Tests.csproj --configuration Release --no-build --no-restore --verbosity minimal
 
       - name: Pack
         run: dotnet pack src/Soenneker.Cloudflare.Speed/Soenneker.Cloudflare.Speed.csproj --configuration Release --no-build --no-restore --output . --verbosity minimal
