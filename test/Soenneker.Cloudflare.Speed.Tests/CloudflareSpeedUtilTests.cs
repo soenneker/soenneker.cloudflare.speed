@@ -1,20 +1,19 @@
-﻿using Soenneker.Cloudflare.Speed.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Cloudflare.Speed.Abstract;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Cloudflare.Speed.Tests;
 
-[Collection("Collection")]
-public sealed class CloudflareSpeedUtilTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class CloudflareSpeedUtilTests : HostedUnitTest
 {
     private readonly ICloudflareSpeedUtil _util;
 
-    public CloudflareSpeedUtilTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public CloudflareSpeedUtilTests(Host host) : base(host)
     {
         _util = Resolve<ICloudflareSpeedUtil>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
