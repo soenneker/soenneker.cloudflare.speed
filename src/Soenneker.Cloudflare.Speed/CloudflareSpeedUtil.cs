@@ -11,7 +11,6 @@ using Soenneker.Extensions.Task;
 
 namespace Soenneker.Cloudflare.Speed;
 
-///<inheritdoc cref="ICloudflareSpeedUtil"/>
 public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
 {
     private readonly ICloudflareClientUtil _client;
@@ -23,7 +22,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         _logger = logger;
     }
 
-    public async ValueTask<ZoneSettingsGetSpeedBrainSetting200> GetSpeedBrainSettings(string zoneId,
+    public async ValueTask<ZoneSettingsGetSpeedBrainSetting200?> GetSpeedBrainSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting Speed Brain settings for zone {ZoneId}", zoneId);
@@ -39,7 +38,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200> UpdateSpeedBrainSettings(string zoneId, bool enabled,
+    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200?> UpdateSpeedBrainSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating Speed Brain settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
@@ -59,7 +58,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200> EnableSpeedBrain(string zoneId,
+    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200?> EnableSpeedBrain(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling Speed Brain for zone {ZoneId}", zoneId);
@@ -79,7 +78,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200> DisableSpeedBrain(string zoneId,
+    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200?> DisableSpeedBrain(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling Speed Brain for zone {ZoneId}", zoneId);
@@ -99,7 +98,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsGetFontsSetting200> GetFontSettings(string zoneId,
+    public async ValueTask<ZoneSettingsGetFontsSetting200?> GetFontSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting font settings for zone {ZoneId}", zoneId);
@@ -115,7 +114,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeFontsSetting200> UpdateFontSettings(string zoneId, bool enabled,
+    public async ValueTask<ZoneSettingsChangeFontsSetting200?> UpdateFontSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating font settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
@@ -136,7 +135,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeFontsSetting200> EnableFontOptimization(string zoneId,
+    public async ValueTask<ZoneSettingsChangeFontsSetting200?> EnableFontOptimization(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling font optimization for zone {ZoneId}", zoneId);
@@ -157,7 +156,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeFontsSetting200> DisableFontOptimization(string zoneId,
+    public async ValueTask<ZoneSettingsChangeFontsSetting200?> DisableFontOptimization(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling font optimization for zone {ZoneId}", zoneId);
