@@ -11,6 +11,7 @@ using Soenneker.Extensions.Task;
 
 namespace Soenneker.Cloudflare.Speed;
 
+/// <inheritdoc cref="ICloudflareSpeedUtil" />
 public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
 {
     private readonly ICloudflareClientUtil _client;
