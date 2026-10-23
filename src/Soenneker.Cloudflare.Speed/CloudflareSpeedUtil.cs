@@ -23,7 +23,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         _logger = logger;
     }
 
-    public async ValueTask<ZoneSettingsGetSpeedBrainSetting200?> GetSpeedBrainSettings(string zoneId,
+    public async ValueTask<ZoneSettingsGetSpeedBrainSetting200Response?> GetSpeedBrainSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting Speed Brain settings for zone {ZoneId}", zoneId);
@@ -39,16 +39,16 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200?> UpdateSpeedBrainSettings(string zoneId, bool enabled,
+    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200Response?> UpdateSpeedBrainSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating Speed Brain settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
         try
         {
-            var requestBody = new ZoneSettingsChangeSpeedBrainSetting
+            var requestBody = new ZoneSettingsChangeSpeedBrainSettingRequest
             {
-                Value = enabled ? ZoneSettingsChangeSpeedBrainSetting_value.On : ZoneSettingsChangeSpeedBrainSetting_value.Off
+                Value = enabled ? ZoneSettingsChangeSpeedBrainSettingRequestValue.On : ZoneSettingsChangeSpeedBrainSettingRequestValue.Off
             };
             return await client.Zones[zoneId].Settings.Speed_brain.PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -59,16 +59,16 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200?> EnableSpeedBrain(string zoneId,
+    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200Response?> EnableSpeedBrain(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling Speed Brain for zone {ZoneId}", zoneId);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
         try
         {
-            var requestBody = new ZoneSettingsChangeSpeedBrainSetting
+            var requestBody = new ZoneSettingsChangeSpeedBrainSettingRequest
             {
-                Value = ZoneSettingsChangeSpeedBrainSetting_value.On
+                Value = ZoneSettingsChangeSpeedBrainSettingRequestValue.On
             };
             return await client.Zones[zoneId].Settings.Speed_brain.PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -79,16 +79,16 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200?> DisableSpeedBrain(string zoneId,
+    public async ValueTask<ZoneSettingsChangeSpeedBrainSetting200Response?> DisableSpeedBrain(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling Speed Brain for zone {ZoneId}", zoneId);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
         try
         {
-            var requestBody = new ZoneSettingsChangeSpeedBrainSetting
+            var requestBody = new ZoneSettingsChangeSpeedBrainSettingRequest
             {
-                Value = ZoneSettingsChangeSpeedBrainSetting_value.Off
+                Value = ZoneSettingsChangeSpeedBrainSettingRequestValue.Off
             };
             return await client.Zones[zoneId].Settings.Speed_brain.PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -99,7 +99,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsGetFontsSetting200?> GetFontSettings(string zoneId,
+    public async ValueTask<ZoneSettingsGetFontsSetting200Response?> GetFontSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting font settings for zone {ZoneId}", zoneId);
@@ -115,14 +115,14 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeFontsSetting200?> UpdateFontSettings(string zoneId, bool enabled,
+    public async ValueTask<ZoneSettingsChangeFontsSetting200Response?> UpdateFontSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating font settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
         try
         {
-            var requestBody = new ZoneSettingsChangeFontsSetting
+            var requestBody = new ZoneSettingsChangeFontsSettingRequest
             {
                 Value = enabled ? SpeedCloudflareFontsValue.On : SpeedCloudflareFontsValue.Off
             };
@@ -136,14 +136,14 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeFontsSetting200?> EnableFontOptimization(string zoneId,
+    public async ValueTask<ZoneSettingsChangeFontsSetting200Response?> EnableFontOptimization(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling font optimization for zone {ZoneId}", zoneId);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
         try
         {
-            var requestBody = new ZoneSettingsChangeFontsSetting
+            var requestBody = new ZoneSettingsChangeFontsSettingRequest
             {
                 Value = SpeedCloudflareFontsValue.On
             };
@@ -157,14 +157,14 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsChangeFontsSetting200?> DisableFontOptimization(string zoneId,
+    public async ValueTask<ZoneSettingsChangeFontsSetting200Response?> DisableFontOptimization(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling font optimization for zone {ZoneId}", zoneId);
         CloudflareOpenApiClient client = await _client.Get(cancellationToken).NoSync();
         try
         {
-            var requestBody = new ZoneSettingsChangeFontsSetting
+            var requestBody = new ZoneSettingsChangeFontsSettingRequest
             {
                 Value = SpeedCloudflareFontsValue.Off
             };
@@ -177,7 +177,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsGetSingleSetting200?> GetEarlyHintsSettings(string zoneId,
+    public async ValueTask<ZoneSettingsGetSingleSetting200Response?> GetEarlyHintsSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting Early Hints settings for zone {ZoneId}", zoneId);
@@ -194,7 +194,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsEditSingleSetting200?> UpdateEarlyHintsSettings(string zoneId, bool enabled,
+    public async ValueTask<ZoneSettingsEditSingleSetting200Response?> UpdateEarlyHintsSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating Early Hints settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
@@ -203,7 +203,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new ZonesZoneSettingsSingleRequest
             {
-                ZonesZoneSettingsSingleRequestMember1 = new ZonesZoneSettingsSingleRequestMember1 { Enabled = enabled }
+                ZonesZoneSettingsSingleRequestOneOf1 = new ZonesZoneSettingsSingleRequestOneOf1 { Enabled = enabled }
             };
             return await client.Zones[zoneId].Settings["early_hints"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -214,7 +214,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsEditSingleSetting200?> EnableEarlyHints(string zoneId,
+    public async ValueTask<ZoneSettingsEditSingleSetting200Response?> EnableEarlyHints(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling Early Hints for zone {ZoneId}", zoneId);
@@ -223,7 +223,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new ZonesZoneSettingsSingleRequest
             {
-                ZonesZoneSettingsSingleRequestMember1 = new ZonesZoneSettingsSingleRequestMember1 { Enabled = true }
+                ZonesZoneSettingsSingleRequestOneOf1 = new ZonesZoneSettingsSingleRequestOneOf1 { Enabled = true }
             };
             return await client.Zones[zoneId].Settings["early_hints"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -234,7 +234,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsEditSingleSetting200?> DisableEarlyHints(string zoneId,
+    public async ValueTask<ZoneSettingsEditSingleSetting200Response?> DisableEarlyHints(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling Early Hints for zone {ZoneId}", zoneId);
@@ -243,7 +243,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new ZonesZoneSettingsSingleRequest
             {
-                ZonesZoneSettingsSingleRequestMember1 = new ZonesZoneSettingsSingleRequestMember1 { Enabled = false }
+                ZonesZoneSettingsSingleRequestOneOf1 = new ZonesZoneSettingsSingleRequestOneOf1 { Enabled = false }
             };
 
             return await client.Zones[zoneId].Settings["early_hints"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
@@ -255,7 +255,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsGetSingleSetting200?> Get0RttSettings(string zoneId,
+    public async ValueTask<ZoneSettingsGetSingleSetting200Response?> Get0RttSettings(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting 0-RTT settings for zone {ZoneId}", zoneId);
@@ -271,7 +271,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsEditSingleSetting200?> Update0RttSettings(string zoneId, bool enabled,
+    public async ValueTask<ZoneSettingsEditSingleSetting200Response?> Update0RttSettings(string zoneId, bool enabled,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating 0-RTT settings for zone {ZoneId} to {Enabled}", zoneId, enabled);
@@ -280,7 +280,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new ZonesZoneSettingsSingleRequest
             {
-                ZonesZoneSettingsSingleRequestMember1 = new ZonesZoneSettingsSingleRequestMember1 { Enabled = enabled }
+                ZonesZoneSettingsSingleRequestOneOf1 = new ZonesZoneSettingsSingleRequestOneOf1 { Enabled = enabled }
             };
             return await client.Zones[zoneId].Settings["0rtt"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -291,7 +291,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsEditSingleSetting200?> Enable0Rtt(string zoneId,
+    public async ValueTask<ZoneSettingsEditSingleSetting200Response?> Enable0Rtt(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Enabling 0-RTT for zone {ZoneId}", zoneId);
@@ -300,7 +300,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new ZonesZoneSettingsSingleRequest
             {
-                ZonesZoneSettingsSingleRequestMember1 = new ZonesZoneSettingsSingleRequestMember1 { Enabled = true }
+                ZonesZoneSettingsSingleRequestOneOf1 = new ZonesZoneSettingsSingleRequestOneOf1 { Enabled = true }
             };
             return await client.Zones[zoneId].Settings["0rtt"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
         }
@@ -311,7 +311,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         }
     }
 
-    public async ValueTask<ZoneSettingsEditSingleSetting200?> Disable0Rtt(string zoneId,
+    public async ValueTask<ZoneSettingsEditSingleSetting200Response?> Disable0Rtt(string zoneId,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Disabling 0-RTT for zone {ZoneId}", zoneId);
@@ -320,7 +320,7 @@ public sealed class CloudflareSpeedUtil : ICloudflareSpeedUtil
         {
             var requestBody = new ZonesZoneSettingsSingleRequest
             {
-                ZonesZoneSettingsSingleRequestMember1 = new ZonesZoneSettingsSingleRequestMember1 { Enabled = false}
+                ZonesZoneSettingsSingleRequestOneOf1 = new ZonesZoneSettingsSingleRequestOneOf1 { Enabled = false}
             };
 
             return await client.Zones[zoneId].Settings["0rtt"].PatchAsync(requestBody, cancellationToken: cancellationToken).NoSync();
